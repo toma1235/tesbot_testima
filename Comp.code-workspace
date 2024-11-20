@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "../Comp"
+		},
+		{
+			"path": "../discordproect"
+		},
+		{
+			"path": "../proggettomamma"
+		},
+		{
+			"path": "../primolez"
+		},
+		{
+			"path": "../New folder (3)"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../calculator"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "New folder (3)",
+		"Codegeex.SidebarUI.LanguagePreference": "English"
+	}
+}
