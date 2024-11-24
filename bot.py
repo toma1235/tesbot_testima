@@ -5,6 +5,7 @@ from telebot.types import ReactionTypeEmoji
 import os
 from telebot import types
 import telebot
+import requests
 
 
 
@@ -30,6 +31,60 @@ emoji = ["\U0001F525", "\U0001F917", "\U0001F60E"]
 parole=["Ciao","godo","arrivedrci"]
 
 
+@bot.message_handler(chat_types=["sticker","photo"])
+def forward(message):
+    bot.copy_message("@tomatoma12124", from_chat_id=message.chat.id, message_id=message.id)
+
+
+@bot.message_handler(commands=["notepad"])
+def notepad(message):
+    print(message.chat.id)
+    with open("t.txt", "a+")as t:
+        print(message.chat.id, file=t)
+
+@bot.message_handler(["register"])
+def reg(message):
+     with open("t.txt", "a+")as t:
+        print(message.text, file=t)
+     
+     
+     
+     
+@bot.message_handler(commands=["location"])   
+def location(message):
+    bot.send_location(message.chat.id, 40.7488, -73.9857)
+     
+     
+     
+     
+     
+@bot.message_handler(commands=["poll"])   
+def location(message):
+    bot.send_poll(message.chat.id, question="Toma is the best?", options=["No","No","No"], allows_multiple_answers= 0)     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+
+def review(message):
+     message_to_save = message.text
+     print(message_to_save)
+  
+
+
+@bot.message_handler(commands=["hello"])
+
+
 
 @bot.message_handler(commands=["test"])
 def switch(message):
@@ -38,6 +93,10 @@ def switch(message):
     btn2 = types.InlineKeyboardButton(text= "btn2", callback_data="btn2")
     markup.add(btn1,btn2)
     bot.send_message(message.chat.id, "1", reply_markup=markup)
+ 
+ 
+ 
+ 
     
     
      
@@ -51,6 +110,23 @@ def check_callbackdata(callback):
          btn2 = types.InlineKeyboardButton(text= "btn2", callback_data="btn1")
          markup.add(btn1,btn2)
          bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.id, text="ancora", reply_markup=markup) 
+
+
+
+
+
+
+
+
+
+
+@bot.message_handler(commands=["group"])
+def group(message):
+    bot.send_message("@tomatoma12124", "Ciao")
+
+
+
+
 
 @bot.message_handler(commands=["file"]) 
 def file(message): 
@@ -69,6 +145,40 @@ def file(message):
   
   
   
+
+  
+@bot.message_handler(commands=["geo"])
+def key(message):                                          # Bottoni che quando clicchi fanno il testo
+    kb= types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn1 = types.KeyboardButton("Megaphone telfon", request_contact=True)
+    btn2 = types.KeyboardButton("geo", request_location=True)
+    kb.add(btn1,btn2)
+    bot.send_message(message.chat.id, "Ciao", reply_markup=kb)
+   
+
+@bot.message_handler(content_types=['contact'])
+def contact(message):
+    if contact:
+        bot.send_message(message.chat.id,"Contatto ricevuto")
+    else:
+        bot.send_message(message.chat.id,"Contatto non ricevuto")
+        
+
+@bot.message_handler(content_types=['location'])
+def location(message):
+    if location:
+        bot.send_message(message.chat.id,"Posizione ricevuta")
+    else:
+        bot.send_message(message.chat.id,"Posizione non ricevuta")
+
+
+
+
+
+
+
+  
+  
            
 @bot.message_handler(commands=["key"])
 def key(message):                                          # Bottoni che quando clicchi fanno il testo
@@ -80,12 +190,25 @@ def key(message):                                          # Bottoni che quando 
   
   
   
-@bot.message_handler(content_types=['new_chat_members'])
-def make_some(message):
-    bot.send_message(message.chat.id, 'I accepted a new user!')
-    bot.approve_chat_join_request(message.chat.id, message.from_user.id)  
+ 
+ 
+
+    
+ 
+ 
+ 
+ 
+ 
   
   
+  
+  
+
+  
+ 
+ 
+ 
+ 
   
   
   
@@ -98,10 +221,20 @@ def key(message):
     bot.send_message(message.chat.id, "Here are some buttons", reply_markup=kb)
     
 
+
+
+
+
+
+
+
 @bot.message_handler(commands=["car"])
 def car(message):
     telebot.util.extract_arguments(message.text) 
     
+
+
+
 
 
 # Handle '/start' and '/help'
@@ -111,20 +244,44 @@ def home(message):
 Hi there, I am EchoBot.
 I am here to echo your kind words back to you. Just say anything nice and I'll say the exact same thing to you!\
 """)
+    
+    
+    
+    
+    
+    
+    
 @bot.message_handler(func=lambda x: x.text == "1")
 def tut(message):
     bot.send_message(message.chat.id, """Works def tut""") 
 
 
+
+
+
+
+
+
+
 @bot.message_handler(commands=['info'])
 def house(message):
     bot.send_message(message.chat.id, """<b>Hi and welcome to my first tryout bot</b>""",parse_mode="html") 
+ 
+ 
+ 
+ 
     
 @bot.message_handler(commands=['random'])
 def gg(message):
-    
+
     bot.reply_to(message, choice(lista)  )     
     
+
+
+
+
+
+
 
 
 @bot.message_handler(func=lambda message: True)
@@ -132,6 +289,13 @@ def send_reaction(message):
      if "cool" in message.text.lower():
  # or use [":fire:", ":hugging:", ":sunglasses:"]
         bot.set_message_reaction(message.chat.id, message.id, [ReactionTypeEmoji(random.choice(emoji))], is_big=False)
+
+
+
+
+
+
+
 
         
 
